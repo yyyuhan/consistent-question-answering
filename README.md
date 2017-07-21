@@ -4,10 +4,12 @@
 ├── out                     # Compiled files
 ├── docs                    # Documentation files 
 ├── src                     # Source files
-│   ├── Compute             # Class with methods implementing the basic algorithm
-│   ├── Loop                # Class with methods implementing the inner loop
-│   ├── Main                # Class running the algorithm and get the result
-│   ├── Postgres            # Class making connections to database
-│   ├── Query               # Enum storing queries
-│   ├── Util                # Class with utility methods
+│   └── ed.inf 
+│       ├── dao             # data access object
+│       │   ├── Cell        # Row in table
+│       │   └── Result      # Result after execution
+│       ├── Main            # Main algorithm
+│       ├── Postgresql      # Operations upon database
+│       ├── Query           # Query storage
+│       └── Util            # Utility methods
 └── test                    # Tests

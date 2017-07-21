@@ -5,6 +5,7 @@ import ed.inf.Util;
  */
 public class Compute {
     public static void main(String[] args) {
-        System.out.println(Util.getRounds(0.1, 0.1));
+
+        System.out.println(Util.getProb(2, 150));
     }
 }
