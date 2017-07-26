@@ -9,8 +9,7 @@ public class Main {
     private static String RWT_QUERY;
     private double err;
     private double alpha;
-    private String oriQuery;
-    private String rwtQuery;
+    private Query query = new Query();
     private final Postgresql psql;
     private final int ROUNDS;
     private int count;
@@ -18,10 +17,9 @@ public class Main {
     public Main(double err, double alpha, String oriQuery, String rwtQuery) {
         this.err = err;
         this.alpha = alpha;
-        this.oriQuery = oriQuery;
-        this.rwtQuery = rwtQuery;
         this.ROUNDS = getRounds(alpha, err);
         this.psql = new Postgresql();
+        this.query = new Query();
         this.ORI_QUERY = oriQuery;
         this.RWT_QUERY = rwtQuery;
         this.count = 0;
@@ -34,17 +32,15 @@ public class Main {
             psql.clearNewTable();
             while (true) {
                 // randomly pick a row to stay
-                String row = psql.randPick(); // TODO
                 // delete other rows with same id
-                psql.delColumn(); // TODO
-                if (! psql.isAvailable()) // TODO:no valid deletion is available
+                psql.initialMap();
+                psql.randPick(); // update delList
+                if (! psql.isAvailable()) // no valid deletion is available
+                    psql.insertDelList();
                     break;
-                else { // valid deletion exists: insert it into new table
-                    psql.insert(row);
-                }
             }
-            if (psql.isConsistent()) // TODO: true
-                count++;
+//            if (psql.isConsistent()) // TODO: true
+//                count++;
 
         }
     }
@@ -54,7 +50,7 @@ public class Main {
         executeLoop();
         long endTime = Util.getTime();
         long oriTime = 0; // TODO
-        return new Result(alpha, err, ROUNDS, oriQuery, count, oriTime, endTime - startTime);
+        return new Result(alpha, err, ROUNDS, ORI_QUERY, count, oriTime, endTime - startTime);
     }
 
     public int getRounds(double alpha, double err) {
@@ -64,11 +60,11 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        Query q = new Query();
-        String oriQuery = q.SELECT_ALL; // TODO
-        String rwtQuery = q.getRwt(oriQuery);
-        Main m = new Main(0.1, 0.1, oriQuery, rwtQuery);
-        Result rst = m.execute();
-        System.out.println(rst);
+
+//        String oriQuery = q.SELECT_ALL; // TODO
+//        String rwtQuery = q.getRwt(oriQuery);
+//        Main m = new Main(0.1, 0.1, oriQuery, rwtQuery);
+//        Result rst = m.execute();
+//        System.out.println(rst);
     }
 }
