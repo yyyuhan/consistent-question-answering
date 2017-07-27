@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Query {
 
-    static final String orinTB = "dup";
+    static final String orinTB = "test";
     static final String newTB = "ctidtest";
 
     public static String SELECT_ALL = "SELECT * FROM #R#;";
@@ -31,28 +31,29 @@ public class Query {
 //        return oriToRwt.get(oriQuery);
 //    }
 
-    public static String getQuery(boolean isTwoTable, String query) {
-        return Util.matchRegex(isTwoTable, query, orinTB, newTB);
+    public static String getQuery(String query, boolean isOrinTB, boolean isNewTB) {
+        if (isOrinTB && isNewTB)
+            return Util.matchRegex(true, query, orinTB, newTB);
+        if (isNewTB)
+            return Util.matchRegex(false, query, newTB, null);
+        else // isOrinTB : true
+            return Util.matchRegex(false, query, orinTB, null);
     }
-    public static String selectAll() {
-        return Util.matchRegex(false, SELECT_ALL, orinTB, null);
-    }
-
-    // clear new table
-    public static String deleteAll() {
-        return Util.matchRegex(false, DELETE_ALL, newTB, null);
-    }
-
-    public static String getSelectInitMap() {
-        return Util.matchRegex(false, SELECT_INIT_MAP, orinTB, null);
-    }
-    // insert into new table
-    public static String getInsert() {
-        return Util.matchRegex(false, INSERT, newTB, null);
-    }
-
-    public static void findViolation() {
-
-    }
+//    public static String selectAll() {
+//        return Util.matchRegex(false, SELECT_ALL, orinTB, null);
+//    }
+//
+//    // clear new table
+//    public static String deleteAll() {
+//        return Util.matchRegex(false, DELETE_ALL, newTB, null);
+//    }
+//
+//    public static String getSelectInitMap() {
+//        return Util.matchRegex(false, SELECT_INIT_MAP, orinTB, null);
+//    }
+//    // insert into new table
+//    public static String getInsert() {
+//        return Util.matchRegex(false, INSERT, newTB, null);
+//    }
 
 }

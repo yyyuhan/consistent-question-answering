@@ -40,11 +40,11 @@ public class Main {
                     psql.insertDelList();
                     break;
             }
-            if (psql.isConsistent(true, RWT_QUERY)) // TODO: true
+            if (psql.isConsistent(RWT_QUERY, true, true)) // TODO: true
                 count++;
 
         }
-        System.out.println("count = " + count);
+//        System.out.println("count = " + count);
     }
 
     public Result execute() {

@@ -30,7 +30,7 @@ public class Postgresql {
         delList = new ArrayList<>();
         conn = getConnection();
         try {
-            conn.setAutoCommit(false); // TODO
+            conn.setAutoCommit(false);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -52,24 +52,24 @@ public class Postgresql {
     }
 
     public void clearNewTable() {
-        System.out.println("===clear new table===");
+//        System.out.println("===clear new table===");
         Statement st;
         int rowsDeleted = 0;
         try {
             st = conn.createStatement();
-            rowsDeleted = st.executeUpdate(Query.deleteAll());
+            rowsDeleted = st.executeUpdate(Query.getQuery(Query.DELETE_ALL, false, true));
             conn.commit();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Successfully deleted " + rowsDeleted + " rows!");
+//        System.out.println("Successfully deleted " + rowsDeleted + " rows!");
     }
 
     public void initialMap() {
         Statement st = null;
         try {
             st = conn.createStatement();
-            ResultSet rs = st.executeQuery(Query.getSelectInitMap());
+            ResultSet rs = st.executeQuery(Query.getQuery(Query.SELECT_INIT_MAP, true, false));
             while (rs.next())
             {
                 int id = rs.getInt(1);
@@ -116,7 +116,7 @@ public class Postgresql {
     public void insertDelList() {
 
         try {
-            PreparedStatement ps = conn.prepareStatement(Query.getInsert());
+            PreparedStatement ps = conn.prepareStatement(Query.getQuery(Query.INSERT, false, true));
             for (String str : delList) {
 //                System.out.println("from del List" + str);
                 ps.setString(1, str);
@@ -129,14 +129,14 @@ public class Postgresql {
 
     }
 
-    public boolean isConsistent(boolean isTwoTable, String QUERY) {
+    public boolean isConsistent(String QUERY, boolean isOrinTB, boolean isNewTB) {
         Statement st = null;
         ResultSet rs = null;
         boolean consistent = false;
         try {
             st = conn.createStatement();
-            rs = st.executeQuery(Query.getQuery(isTwoTable, QUERY));
-            if (! rs.next()) // result set is empty
+            rs = st.executeQuery(Query.getQuery(QUERY, isOrinTB, isNewTB));
+            if (rs.next()) // result set is not empty
                 consistent = true;
             rs.close();
             st.close();
