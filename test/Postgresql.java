@@ -10,11 +10,11 @@ public class Postgresql {
     public static void main(String[] args) {
 //        String stat = "select * from (#R1#.";
 //        System.out.println(Util.matchRegex(stat,"cat", null));
-        ed.inf.Postgresql psql = new ed.inf.Postgresql();
+//        ed.inf.Postgresql psql = new ed.inf.Postgresql();
 //        psql.clearNewTable();
-        psql.initialMap();
+//        psql.initialMap();
 //        psql.clearNewTable();
-        psql.randPick();
-        psql.insertDelList();
+//        psql.randPick();
+//        psql.insertDelList();
     }
 }

@@ -81,6 +81,8 @@ public class Postgresql {
                 } else {
                     dupMap.get(id).add(ctid);
                 }
+
+
             }
             rs.close();
             st.close();
@@ -116,7 +118,7 @@ public class Postgresql {
         try {
             PreparedStatement ps = conn.prepareStatement(Query.getInsert());
             for (String str : delList) {
-                System.out.println(str);
+//                System.out.println("from del List" + str);
                 ps.setString(1, str);
                 ps.executeUpdate();
             }
@@ -125,5 +127,22 @@ public class Postgresql {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean isConsistent(boolean isTwoTable, String QUERY) {
+        Statement st = null;
+        ResultSet rs = null;
+        boolean consistent = false;
+        try {
+            st = conn.createStatement();
+            rs = st.executeQuery(Query.getQuery(isTwoTable, QUERY));
+            if (! rs.next()) // result set is empty
+                consistent = true;
+            rs.close();
+            st.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return consistent;
     }
 }

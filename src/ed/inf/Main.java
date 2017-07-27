@@ -27,22 +27,24 @@ public class Main {
 
     public void executeLoop() {
         // loop
+        psql.initialMap();
         for (int idx=1; idx<=ROUNDS; idx++) {
             // clear table
             psql.clearNewTable();
             while (true) {
                 // randomly pick a row to stay
                 // delete other rows with same id
-                psql.initialMap();
                 psql.randPick(); // update delList
                 if (! psql.isAvailable()) // no valid deletion is available
+//                    System.out.println("is not avalable!!!!!!!!!!!");
                     psql.insertDelList();
                     break;
             }
-//            if (psql.isConsistent()) // TODO: true
-//                count++;
+            if (psql.isConsistent(true, RWT_QUERY)) // TODO: true
+                count++;
 
         }
+        System.out.println("count = " + count);
     }
 
     public Result execute() {
@@ -63,8 +65,8 @@ public class Main {
 
 //        String oriQuery = q.SELECT_ALL; // TODO
 //        String rwtQuery = q.getRwt(oriQuery);
-//        Main m = new Main(0.1, 0.1, oriQuery, rwtQuery);
-//        Result rst = m.execute();
+        Main m = new Main(0.1, 0.1, null, Query.SELECT_NOT_IN);
+        System.out.println(m.execute());
 //        System.out.println(rst);
     }
 }

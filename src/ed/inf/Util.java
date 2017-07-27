@@ -20,20 +20,29 @@ public class Util {
         return System.currentTimeMillis();
     }
 
-    public static String matchRegex(String stat, String orinTB, String newTB) {
+    public static String matchRegex(boolean isTwoTable, String stat, String orinTB, String newTB) {
         String REGEX;
-        if (orinTB != null && newTB != null) {
+        if (isTwoTable) {
             REGEX = "#R1#";
             stat = Pattern.compile(REGEX).matcher(stat).replaceAll(orinTB);
             REGEX = "#R2#";
             return Pattern.compile(REGEX).matcher(stat).replaceAll(newTB);
-        }
-        REGEX = "#R#";
-        if (orinTB == null) {
-            return Pattern.compile(REGEX).matcher(stat).replaceAll(newTB);
-        }
-        else
+        } else {
+            REGEX = "#R#";
             return Pattern.compile(REGEX).matcher(stat).replaceAll(orinTB);
+        }
+//        if (orinTB != null && newTB != null) {
+//            REGEX = "#R1#";
+//            stat = Pattern.compile(REGEX).matcher(stat).replaceAll(orinTB);
+//            REGEX = "#R2#";
+//            return Pattern.compile(REGEX).matcher(stat).replaceAll(newTB);
+//        }
+//        REGEX = "#R#";
+//        if (orinTB == null) {
+//            return Pattern.compile(REGEX).matcher(stat).replaceAll(newTB);
+//        }
+//        else
+//            return Pattern.compile(REGEX).matcher(stat).replaceAll(orinTB);
     }
 
     public static double getProb(int count, int rounds) {
@@ -47,6 +56,7 @@ public class Util {
             int i = 0;
             for (String ctid : dupMap.get(key)) {
                 if (rdm != i) {
+//                    System.out.println("citd add to del list = " + ctid);
                    delList.add(ctid);
                 }
                 i++;

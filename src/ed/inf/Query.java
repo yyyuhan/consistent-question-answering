@@ -15,6 +15,7 @@ public class Query {
     public static String DELETE_ALL = "DELETE FROM #R#;";
     public static String INSERT = "INSERT INTO #R# (id) VALUES (? :: tid);";
     public static String SELECT_INIT_MAP = "SELECT id, ctid FROM #R#;";
+    public static String SELECT_NOT_IN = "SELECT * FROM (SELECT * FROM #R1# as temp WHERE ctid NOT IN (SELECT ctid from #R2#)) as tempd WHERE age>33 AND city='Edinburgh';";
 //    insert into ctidtest (id) values (concat('(',10,',','20',')')::tid);
 
 
@@ -30,21 +31,24 @@ public class Query {
 //        return oriToRwt.get(oriQuery);
 //    }
 
+    public static String getQuery(boolean isTwoTable, String query) {
+        return Util.matchRegex(isTwoTable, query, orinTB, newTB);
+    }
     public static String selectAll() {
-        return Util.matchRegex(SELECT_ALL, orinTB, null);
+        return Util.matchRegex(false, SELECT_ALL, orinTB, null);
     }
 
     // clear new table
     public static String deleteAll() {
-        return Util.matchRegex(DELETE_ALL, null, newTB);
+        return Util.matchRegex(false, DELETE_ALL, newTB, null);
     }
 
     public static String getSelectInitMap() {
-        return Util.matchRegex(SELECT_INIT_MAP, orinTB, null);
+        return Util.matchRegex(false, SELECT_INIT_MAP, orinTB, null);
     }
     // insert into new table
     public static String getInsert() {
-        return Util.matchRegex(INSERT, null, newTB);
+        return Util.matchRegex(false, INSERT, newTB, null);
     }
 
     public static void findViolation() {
