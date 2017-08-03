@@ -81,8 +81,6 @@ public class Postgresql {
                 } else {
                     dupMap.get(id).add(ctid);
                 }
-
-
             }
             rs.close();
             st.close();
@@ -129,7 +127,7 @@ public class Postgresql {
 
     }
 
-    public boolean isConsistent(String QUERY, boolean isOrinTB, boolean isNewTB) {
+    public boolean evalQuery(String QUERY, boolean isOrinTB, boolean isNewTB) {
         Statement st = null;
         ResultSet rs = null;
         boolean consistent = false;

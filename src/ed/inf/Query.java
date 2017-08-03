@@ -14,7 +14,7 @@ public class Query {
     public static String SELECT_ALL = "SELECT * FROM #R#;";
     public static String DELETE_ALL = "DELETE FROM #R#;";
     public static String INSERT = "INSERT INTO #R# (id) VALUES (? :: tid);";
-    public static String SELECT_INIT_MAP = "SELECT id, ctid FROM #R#;";
+    public static String SELECT_INIT_MAP = "SELECT id, ctid from (SELECT id, ctid, COUNT(*) OVER (PARTITION BY id) AS counter FROM test) t where t.counter>1;";
     public static String SELECT_NOT_IN = "SELECT * FROM (SELECT * FROM #R1# as temp WHERE ctid NOT IN (SELECT ctid from #R2#)) as tempd WHERE age>33 AND city='Edinburgh';";
 //    insert into ctidtest (id) values (concat('(',10,',','20',')')::tid);
 
@@ -39,21 +39,6 @@ public class Query {
         else // isOrinTB : true
             return Util.matchRegex(false, query, orinTB, null);
     }
-//    public static String selectAll() {
-//        return Util.matchRegex(false, SELECT_ALL, orinTB, null);
-//    }
-//
-//    // clear new table
-//    public static String deleteAll() {
-//        return Util.matchRegex(false, DELETE_ALL, newTB, null);
-//    }
-//
-//    public static String getSelectInitMap() {
-//        return Util.matchRegex(false, SELECT_INIT_MAP, orinTB, null);
-//    }
-//    // insert into new table
-//    public static String getInsert() {
-//        return Util.matchRegex(false, INSERT, newTB, null);
-//    }
+
 
 }

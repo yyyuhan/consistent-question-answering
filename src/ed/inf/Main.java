@@ -36,11 +36,10 @@ public class Main {
                 // delete other rows with same id
                 psql.randPick(); // update delList
                 if (! psql.isAvailable()) // no valid deletion is available
-//                    System.out.println("is not avalable!!!!!!!!!!!");
                     psql.insertDelList();
                     break;
             }
-            if (psql.isConsistent(RWT_QUERY, true, true)) // TODO: true
+            if (psql.evalQuery(RWT_QUERY, true, true)) // true
                 count++;
 
         }
