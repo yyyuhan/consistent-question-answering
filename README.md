@@ -1,8 +1,8 @@
 # consistent-question-answering
 # structure
-.
-├── out                     # Compiled files
-├── docs                    # Documentation files 
+. <br>
+├── out                     # Compiled files <br>
+├── docs                    # Documentation files <br>
 ├── src                     # Source files
 │   └── ed.inf 
 │       ├── dao             # data access object
