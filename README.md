@@ -3,13 +3,13 @@
 . <br>
 ├── out                     # Compiled files <br>
 ├── docs                    # Documentation files <br>
-├── src                     # Source files
-│   └── ed.inf 
-│       ├── dao             # data access object
-│       │   ├── Cell        # Row in table
-│       │   └── Result      # Result after execution
-│       ├── Main            # Main algorithm
-│       ├── Postgresql      # Operations upon database
-│       ├── Query           # Query storage
-│       └── Util            # Utility methods
-└── test                    # Tests
+├── src                     # Source files <br>
+│   └── ed.inf  <br>
+│       ├── dao             # data access object <br>
+│       │   ├── Cell        # Row in table <br>
+│       │   └── Result      # Result after execution <br>
+│       ├── Main            # Main algorithm <br>
+│       ├── Postgresql      # Operations upon database <br>
+│       ├── Query           # Query storage <br>
+│       └── Util            # Utility methods <br>
+└── test                    # Tests <br>
