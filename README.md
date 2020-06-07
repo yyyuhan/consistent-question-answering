@@ -1,5 +1,5 @@
 # consistent-question-answering
-#structure
+# structure
 .
 ├── out                     # Compiled files
 ├── docs                    # Documentation files 
